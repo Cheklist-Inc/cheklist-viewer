@@ -10,6 +10,9 @@ export default function Home() {
         <h1 className="text-center">
           cheklist entry viewer
         </h1>
+        <div className="text-center text-sm text-gray-400">
+          sample app for the cheklist.io api. fork it <a href="https://github.com/Cheklist-Inc/cheklist-viewer" target="_blank" rel="noopener noreferrer">here</a>.
+        </div>
       </div>
 
       <CheklistProvider>
