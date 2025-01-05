@@ -21,6 +21,8 @@ interface CheklistContextType {
     setCheklistEntry: (entry: CheklistEntry | null) => void;
     isLoading: boolean;
     setIsLoading: (loading: boolean) => void;
+    error: string | null;
+    setError: (error: string | null) => void;
 }
 
 const CheklistContext = createContext<CheklistContextType | undefined>(undefined);
@@ -28,13 +30,16 @@ const CheklistContext = createContext<CheklistContextType | undefined>(undefined
 export function CheklistProvider({ children }: { children: ReactNode }) {
     const [cheklistEntry, setCheklistEntry] = useState<CheklistEntry | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     return (
         <CheklistContext.Provider value={{
             cheklistEntry,
             setCheklistEntry,
             isLoading,
-            setIsLoading
+            setIsLoading,
+            error,
+            setError
         }}>
             {children}
         </CheklistContext.Provider>

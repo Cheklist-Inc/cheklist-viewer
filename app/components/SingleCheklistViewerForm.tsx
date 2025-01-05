@@ -3,21 +3,44 @@
 import { useCheklistContext } from '../context/CheklistContext';
 
 export default function SingleCheklistViewerForm() {
-    const { setCheklistEntry, isLoading, setIsLoading } = useCheklistContext();
+    const {
+        setCheklistEntry,
+        isLoading,
+        setIsLoading,
+        error,
+        setError
+    } = useCheklistContext();
 
     const getCheklistEntry = async (cheklistSlug: string, userEmail: string) => {
         setIsLoading(true);
+        setError(null);
         try {
             const res = await fetch(
                 `/api/cheklistEntry?slug=${encodeURIComponent(cheklistSlug)}&email=${encodeURIComponent(userEmail)}`
             );
 
-            if (!res.ok) {
-                console.log('failed to fetch cheklist entry');
-                return;
+            let data;
+            try {
+                data = await res.json();
+            } catch (parseError) {
+                setCheklistEntry(null);
+                throw new Error('invalid cheklist url format');
             }
 
-            return res.json();
+            if (!res.ok || data.error) {
+                setCheklistEntry(null);
+                throw new Error(data.error || 'failed to fetch cheklist entry');
+            }
+
+            return data;
+        } catch (err) {
+            setCheklistEntry(null);
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('an unexpected error occurred');
+            }
+            return null;
         } finally {
             setIsLoading(false);
         }
@@ -29,24 +52,35 @@ export default function SingleCheklistViewerForm() {
         const cheklistUrl = formData.get("cheklist-url") as string;
         const cheklistUserEmail = formData.get("cheklist-user-email");
 
-        const cheklistSlug = cheklistUrl.split('/cheklist/').pop() || '';
-        if (!cheklistSlug) {
-            console.log('no slug found after /cheklist/');
+        // Validate URL format first
+        if (!cheklistUrl.includes('cheklist.io/cheklist/')) {
+            setCheklistEntry(null);
+            setError('invalid cheklist url format');
+            return;
+        }
+
+        // Extract slug only after /cheklist/
+        const cheklistSlug = cheklistUrl.split('/cheklist/').pop()?.trim() || '';
+
+        // Validate the slug is clean (no slashes or spaces)
+        if (!cheklistSlug || cheklistSlug.includes('/') || cheklistSlug.includes(' ')) {
+            setCheklistEntry(null);
+            setError('invalid cheklist slug format');
             return;
         }
 
         if (!cheklistUserEmail || typeof cheklistUserEmail !== 'string') {
-            console.log('no user email found');
+            setCheklistEntry(null);
+            setError('please provide a valid email address');
             return;
         }
 
         getCheklistEntry(cheklistSlug, cheklistUserEmail)
             .then(response => {
-                console.log('cheklist entry:', response);
-                setCheklistEntry(response.data);
-            })
-            .catch(error => {
-                console.error('error fetching cheklist entry:', error);
+                if (response) {
+                    console.log('cheklist entry:', response);
+                    setCheklistEntry(response.data);
+                }
             });
     }
 
@@ -101,6 +135,14 @@ export default function SingleCheklistViewerForm() {
                         'get entry'
                     )}
                 </button>
+
+                {error && (
+                    <div className="pt-4">
+                        <div className="pt-4 text-md text-white bg-pink-500 px-6 py-4 rounded-md">
+                            {error}
+                        </div>
+                    </div>
+                )}
             </form>
         </div>
     );
