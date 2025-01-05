@@ -8,7 +8,7 @@ export default function Home() {
 
       <div>
         <h1 className="text-center">
-          cheklist viewer
+          cheklist entry viewer
         </h1>
       </div>
 

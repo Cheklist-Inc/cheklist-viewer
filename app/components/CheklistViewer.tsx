@@ -87,7 +87,7 @@ export default function CheklistViewer() {
                                 type="checkbox"
                                 checked={value}
                                 readOnly
-                                className="h-4 w-4"
+                                className="h-4 w-4 accent-pink-500"
                             />
                             <span>{key}</span>
                         </div>
