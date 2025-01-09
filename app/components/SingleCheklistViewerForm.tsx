@@ -100,6 +100,7 @@ export default function SingleCheklistViewerForm() {
                         type="text"
                         id="cheklist-url"
                         name="cheklist-url"
+                        className="bg-black text-white"
                     />
                     <div className="text-sm text-gray-400 pt-1">
                         ex: https://cheklist.io/cheklist/cheklist-viewer-test
@@ -116,6 +117,7 @@ export default function SingleCheklistViewerForm() {
                         type="text"
                         id="cheklist-user-email"
                         name="cheklist-user-email"
+                        className="bg-black text-white"
                     />
                 </div>
 
