@@ -24,7 +24,7 @@ export default function SingleCheklistViewerForm() {
                 data = await res.json();
             } catch (parseError) {
                 setCheklistEntry(null);
-                throw new Error('invalid cheklist url format');
+                throw new Error(`invalid cheklist url format: ${parseError}`);
             }
 
             if (!res.ok || data.error) {
