@@ -50,7 +50,7 @@ export default function SingleCheklistViewerForm() {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
         const cheklistUrl = formData.get("cheklist-url") as string;
-        const cheklistUserEmail = formData.get("cheklist-user-email");
+        const cheklistUserEmail = (formData.get("cheklist-user-email") as string)?.toLowerCase();
 
         // Validate URL format first
         if (!cheklistUrl.includes('cheklist.io/cheklist/')) {
