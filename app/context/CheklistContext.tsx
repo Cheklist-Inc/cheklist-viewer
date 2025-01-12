@@ -2,8 +2,9 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-interface CheklistFields {
-    [key: string]: boolean;
+interface CheklistField {
+    name: string;
+    checked: boolean;
 }
 
 interface CheklistEntry {
@@ -13,7 +14,7 @@ interface CheklistEntry {
     cheklist_author_name: string;
     cheklist_author_url: string;
     user_email: string;
-    fields: CheklistFields;
+    fields: CheklistField[];
 }
 
 interface CheklistContextType {

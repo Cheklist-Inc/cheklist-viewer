@@ -81,15 +81,15 @@ export default function CheklistViewer() {
                 </div>
 
                 <div className="grid gap-2">
-                    {Object.entries(cheklistEntry.fields).map(([key, value]) => (
-                        <div key={key} className="flex items-center gap-2">
+                    {cheklistEntry.fields.map((field, index) => (
+                        <div key={index} className="flex items-center gap-2">
                             <input
                                 type="checkbox"
-                                checked={value}
+                                checked={field.checked}
                                 readOnly
                                 className="h-4 w-4 accent-pink-500"
                             />
-                            <span>{key}</span>
+                            <span>{field.name}</span>
                         </div>
                     ))}
                 </div>

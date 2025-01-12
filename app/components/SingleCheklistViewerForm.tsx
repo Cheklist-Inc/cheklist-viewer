@@ -140,7 +140,7 @@ export default function SingleCheklistViewerForm() {
 
                 {error && (
                     <div className="pt-4">
-                        <div className="pt-4 text-md text-white bg-pink-500 px-6 py-4 rounded-md">
+                        <div className="pt-4 text-md text-white bg-pink-600 px-6 py-4 rounded-md">
                             {error}
                         </div>
                     </div>
