@@ -5,6 +5,7 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 interface CheklistField {
     name: string;
     checked: boolean;
+    link: string | null;
 }
 
 interface CheklistEntry {

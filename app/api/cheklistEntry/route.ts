@@ -6,7 +6,7 @@ export async function GET(request: Request) {
     const userEmail = searchParams.get('email');
 
     if (!cheklistSlug || !userEmail) {
-        return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
+        return NextResponse.json({ error: 'missing required parameters' }, { status: 400 });
     }
 
     const res = await fetch(

@@ -2,6 +2,7 @@
 
 import { useCheklistContext } from '../context/CheklistContext';
 import Link from 'next/link';
+import { Link as LinkIcon } from 'lucide-react';
 
 export default function CheklistViewer() {
     const { cheklistEntry, isLoading } = useCheklistContext();
@@ -89,7 +90,20 @@ export default function CheklistViewer() {
                                 readOnly
                                 className="h-4 w-4 accent-pink-500"
                             />
-                            <span>{field.name}</span>
+                            {field.link ? (
+                                <div className="flex items-center gap-1 hover:text-pink-500">
+                                    <Link
+                                        href={field.link}
+                                        target="_blank"
+                                        className="flex items-center gap-1 text-inherit hover:no-underline"
+                                    >
+                                        {field.name}
+                                        <LinkIcon className="h-3 w-3 text-inherit cursor-pointer" />
+                                    </Link>
+                                </div>
+                            ) : (
+                                <span>{field.name}</span>
+                            )}
                         </div>
                     ))}
                 </div>
