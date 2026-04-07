@@ -88,7 +88,7 @@ export default function CheklistViewer() {
                                 type="checkbox"
                                 checked={field.checked}
                                 readOnly
-                                className="h-4 w-4 accent-pink-500"
+                                className="h-4 w-4 shrink-0 accent-pink-500"
                             />
                             {field.link ? (
                                 <div className="flex items-center gap-1 hover:text-pink-500">
