@@ -1,6 +1,4 @@
-import SingleCheklistViewerForm from "./components/SingleCheklistViewerForm";
-import CheklistViewer from "./components/CheklistViewer";
-import { CheklistProvider } from "./context/CheklistContext";
+import HomeClient from "./components/HomeClient";
 
 export default function Home() {
   return (
@@ -15,15 +13,7 @@ export default function Home() {
         </div>
       </div>
 
-      <CheklistProvider>
-        <div>
-          <SingleCheklistViewerForm />
-        </div>
-
-        <div>
-          <CheklistViewer />
-        </div>
-      </CheklistProvider>
+      <HomeClient />
 
     </div>
   );
